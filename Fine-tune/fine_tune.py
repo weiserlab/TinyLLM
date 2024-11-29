@@ -262,12 +262,16 @@ def fine_tune(model,
     # Get LoRA module names
     target_modules = find_all_linear_names(model)
 
+    # if model 
+    # modules_to_save = ["lm_head", "embed_token"]
+
     # Create PEFT configuration for these modules and wrap the model to PEFT
     peft_config = LoraConfig(
         r = lora_r,
         lora_alpha = lora_alpha,
         target_modules = target_modules,
         lora_dropout = lora_dropout,
+	# modules_to_save = modules_to_save,
         bias = bias,
         task_type = task_type,
     )

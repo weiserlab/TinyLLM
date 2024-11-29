@@ -16,7 +16,7 @@ args = parser.parse_args()
 # Configuration
 dataset1_path = os.path.join(os.path.dirname(__file__), "encoded", "SHL")
 dataset2_path = os.path.join(os.path.dirname(__file__), "encoded", "Fineweb")
-TOTAL_TOKENS = 9_000_000_000  # 1 billion tokens
+TOTAL_TOKENS = 9_000_000_000  # 9 billion tokens
 TRAIN_RATIO = 0.98  # 98% for training
 VALIDATION_RATIO = 1 - TRAIN_RATIO  # 2% for validation
 SHARD_SIZE = 100 * 1024 * 1024  # 100 MB per shard, adjust according to your needs
