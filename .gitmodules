@@ -1,0 +1,6 @@
+[submodule "llm.c"]
+	path = llm.c
+	url = https://github.com/VIS-WA/llm.c
+[submodule "llama.cpp"]
+	path = llama.cpp
+	url = https://github.com/VIS-WA/llama.cpp
