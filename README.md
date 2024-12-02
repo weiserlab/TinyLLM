@@ -9,9 +9,12 @@ ArXiv:
 ## Installation
 
 Setting up:
-- setup llm.c (GPU setup required). Find instructions [here]()
-- setup llama.cpp [here]
-- install requirements (FT, datasets processing)
+- setup llm.c (GPU setup required). Find instructions [here](https://github.com/karpathy/llm.c/discussions/481)
+- setup llama.cpp [read here](https://github.com/VIS-WA/llama.cpp/blob/master/docs/build.md)
+- install other requirements (to facilitate dataset processing and fine-tuning)
+```bash
+pip install -r requirements.txt
+```
 
 ## Usage
 
