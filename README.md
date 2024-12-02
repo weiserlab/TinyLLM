@@ -39,7 +39,7 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
 
 2. Tokenize datasets using `encode.py`:  
    - Supports custom data in CSV format or datasets hosted on HuggingFace.  
-   - By default, the script processes Fineweb (10 Billion tokens variant, auto-downloaded) and SHL (IoT sensor dataset, download instructions [here]()).  
+   - By default, the script processes Fineweb (10 Billion tokens variant, auto-downloaded) and SHL (IoT sensor dataset, download instructions [here](https://github.com/weiserlab/TinyLLM/tree/main/Datasets/SHL)).  
    ```bash
    python encode.py
    ```
