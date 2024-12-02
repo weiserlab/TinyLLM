@@ -38,8 +38,9 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
    ```
 
 2. Tokenize datasets using `encode.py`:  
-   - Supports custom data in CSV format or datasets hosted on HuggingFace.  
-   - By default, the script processes Fineweb (10 Billion tokens variant, auto-downloaded) and SHL (IoT sensor dataset, download instructions [here](https://github.com/weiserlab/TinyLLM/tree/main/Datasets/SHL)).  
+   - Supports user's private custom data (in CSV format) or datasets hosted on HuggingFace.  
+   - By default, the script processes Fineweb (10 Billion tokens variant, auto-downloaded) and SHL (IoT sensor dataset, download instructions [here](https://github.com/weiserlab/TinyLLM/tree/main/Datasets/SHL)).
+   - Change the `datasets_to_tokenize` parameter in `encode.py` appropriately to tokenise custom datasets to include them later in the pre-training process.  
    ```bash
    python encode.py
    ```
@@ -51,9 +52,8 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
    ```bash
    python split.py -d1 0.3 -d2 0.7 -o ./pretraining_data
    ```
-   - Adjust parameters if needed. Current defaults produce a dataset with 9 Billion tokens, with Training:Validation split in a 98:2 ratio with 100MB shards.  
-
-5. Optimize for storage/memory:  
+   - Current defaults produce a dataset with 9 Billion tokens, with Training:Validation split in a 98:2 ratio with 100MB shards.
+   - Adjust parameters if needed. Change the `dataset1_path` and `dataset1_path` to include other datasets. More than 2 datasets can be used too by simple modifications to the script.  
    - If necessary, reduce shard size from 100MB to 75MB or smaller.  
 </details>
 
