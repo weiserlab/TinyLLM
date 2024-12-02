@@ -1,8 +1,8 @@
 # TinyLLM  
 *A Framework for Training, Fine-Tuning, and Deploying Smaller LLMs on Custom Datasets*
 
-- **Website**: [Add URL here]  
-- **ArXiv**: [Add URL here]  
+- **Website**: [TinyLLM.org](https://tinyllm.org/)  
+- **ArXiv**: Coming up 
 
 ---
 
@@ -29,6 +29,8 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
 ## Usage  
 
 ### 1. Preparing Pre-training Datasets  
+<details>
+<summary>Click to expand</summary>
 
 1. Navigate to the datasets folder:  
    ```bash
@@ -53,11 +55,15 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
 
 5. Optimize for storage/memory:  
    - If necessary, reduce shard size from 100MB to 75MB or smaller.  
+</details>
 
 ---
 
 ### 2. Pre-training the Model  
 
+<details>
+<summary>Click to expand</summary>
+   
 1. Navigate to the `llm.c` folder:  
    ```bash
    cd ../llm.c/
@@ -96,28 +102,46 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
    lf=$(ls custom_model/model_000*.bin | sort -V | tail -n 1) # Select the latest model
    python dev/eval/export_hf.py -i "$lf" -o "custom_model_hf"
    ```
+</details>
 
 ---
 
-### 3. Fine-tuning the Model  
+### 3. Fine-tuning the Model 
+
+<details>
+<summary>Click to expand</summary>
 
 - Copy the original tokenizer files into the fine-tuning directory.  
 - [Add detailed fine-tuning steps here].  
+
+</details>
 
 ---
 
 ### 4. Deploying the Model  
 
+<details>
+<summary>Click to expand</summary>
+
 1. Convert the model to GGUF format.  
 2. Optional: Quantize the model for optimized inference.  
-3. [Add deployment steps here].  
+3. [Add deployment steps here].
+
+</details>
 
 ---
 
 ## Contributing  
-We welcome contributions to TinyLLM! Please follow our [contribution guidelines]() and submit pull requests for any enhancements or bug fixes.  
+We welcome contributions to TinyLLM!
+
+Also find collection of models pre-trained on web and sensor data on our [HuggingFace](https://huggingface.co/TinyLLM) page. 
 
 ---
 
-## License  
-TinyLLM is distributed under the [LICENSE NAME HERE] license. See the [LICENSE]() file for details.  
+## Acknowledgments  
+Thank you to the creators of [llm.c](https://github.com/karpathy/llm.c) and [llama.cpp](https://github.com/ggerganov/llama.cpp) for making LLM training and usage more accessible.  
+
+We also acknowledge the use of the following external datasets in this framework:  
+- [Fineweb](https://huggingface.co/datasets/HuggingFaceFW/fineweb)  
+- [SHL](https://www.shl-dataset.org/)  
+- [ExtraSensory](http://extrasensory.ucsd.edu/)  
