@@ -1,0 +1,7 @@
+numpy
+pandas
+tqdm
+scikit-learn
+datasets
+requests
+tiktoken
