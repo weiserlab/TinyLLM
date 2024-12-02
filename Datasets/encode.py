@@ -15,8 +15,8 @@ args = argparse.Namespace(model_desc="gpt-2")  # Simplified for illustration
 # List of datasets to tokenize
 datasets_to_tokenize = [
      ("HuggingFaceFW/fineweb", "sample-10BT", ["text"]), #hugging face repo, and "text" is the column to be extracted
-     ("./datasets/SHL/", "", ['Sensor Data', 'Label']), # local dataset, 2 columns to be extracted
-
+     ("./SHL/data/", "", ['Sensor Data', 'Label']), # path to the local dataset, desried (here 2) columns to be extracted
+     #("Path to the local/ huggingface dataset", "", ['column', 'names', 'to be extracted']),
 ]
 
 CHUNK_SIZE = 100 * 1024 * 1024  # 100 MB in bytes

@@ -9,13 +9,13 @@ import random
 parser = argparse.ArgumentParser(description="Merge datasets by reading content proportionally and saving fixed-size shards.")
 parser.add_argument("-d1", "--dataset1_ratio", type=float, default=0.3, help="Ratio of content to take from SHL dataset (default: 0.3)")
 parser.add_argument("-d2", "--dataset2_ratio", type=float, default=0.7, help="Ratio of content to take from Fineweb dataset (default: 0.7)")
-parser.add_argument("-o", "--output_dir", type=str, default="merged_output", help="Output directory to save merged shards (default: 'merged_output')")
+parser.add_argument("-o", "--output_dir", type=str, default="pretraining_data", help="Output directory to save merged shards (default: 'pretraining_data')")
 
 args = parser.parse_args()
 
 # Configuration
-dataset1_path = os.path.join(os.path.dirname(__file__), "encoded", "SHL")
-dataset2_path = os.path.join(os.path.dirname(__file__), "encoded", "Fineweb")
+dataset1_path = os.path.join(os.path.dirname(__file__), "SHL")
+dataset2_path = os.path.join(os.path.dirname(__file__), "Fineweb")
 TOTAL_TOKENS = 9_000_000_000  # 9 billion tokens
 TRAIN_RATIO = 0.98  # 98% for training
 VALIDATION_RATIO = 1 - TRAIN_RATIO  # 2% for validation
