@@ -20,7 +20,7 @@ import os
 import pandas as pd
 
 # The path to the directory where the files are stored
-path = './'
+path = './data'
 
 # The path to the directory where the merged file should be stored
 output_path = './'
@@ -111,9 +111,9 @@ validation_data = validation_data.sample(frac=1).reset_index(drop=True)
 testing_data = testing_data.sample(frac=1).reset_index(drop=True)
 
 # save the training and testing data to csv files
-training_data.to_csv(os.path.join(output_path, 'gemma_training_data.csv'), index=False)
-validation_data.to_csv(os.path.join(output_path, 'gemma_validation_data.csv'), index=False)
-testing_data.to_csv(os.path.join(output_path, 'gemma_testing_data.csv'), index=False)
+training_data.to_csv(os.path.join(output_path, 'training_data.csv'), index=False)
+validation_data.to_csv(os.path.join(output_path, 'validation_data.csv'), index=False)
+testing_data.to_csv(os.path.join(output_path, 'testing_data.csv'), index=False)
 
 
 
