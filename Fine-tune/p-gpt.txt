@@ -1,0 +1,11 @@
+lora_r = 64
+lora_alpha = 256 
+lora_dropout = 0.35 
+bias = "lora_only"
+task_type = "CAUSAL_LM"
+per_device_train_batch_size = 1 
+gradient_accumulation_steps = 6 
+learning_rate = 6e-4 
+max_steps = 2050 
+warmup_steps = 200 
+optim = "paged_adamw_32bit"

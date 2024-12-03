@@ -1,7 +1,15 @@
 numpy
 pandas
+matplotlib
 tqdm
 scikit-learn
 datasets
 requests
 tiktoken
+torch
+transformers
+bitsandbytes
+peft
+trl
+plotext
+

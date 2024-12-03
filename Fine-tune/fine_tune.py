@@ -11,7 +11,6 @@ from transformers import (AutoModelForCausalLM,
                           TrainingArguments,
                           DataCollatorForLanguageModeling,
                         #   EarlyStoppingCallback,
-                          pipeline,
                         #   logging,
                           set_seed)
 from transformers.pipelines.pt_utils import KeyDataset
@@ -95,11 +94,7 @@ def preprocess_dataset(tokenizer: AutoTokenizer, max_length: int, seed, dataset:
     # Apply preprocessing to each batch of the dataset & and remove "instruction", "input", "output", and "text" fields
     _preprocessing_function = partial(preprocess_batch, max_length = max_length, tokenizer = tokenizer)
     columns = dataset.column_names
-    # remove "text" from the columns
-    # if name == "Testing":
-    #     print("***Keeping text and output columns***") 
-    #     columns.remove("text")
-    #     columns.remove("output")
+
     dataset = dataset.map(
         _preprocessing_function,
         batched = True,
@@ -168,9 +163,7 @@ def load_model_dataset(model_name, model_dir, device_t, bnb_config, training_dat
         whole_dataset  = load_dataset(training_dataset_name,split = "train")
         train_test_split = whole_dataset.train_test_split(test_size=0.1)
         train_valid_split = train_test_split['train'].train_test_split(test_size=0.0526)  # 5% of 95% is about 0.0526
-        
-        # Further split the 95% training data into 90% train and 5% validation
-	    
+        	    
 
 	# Access the train, validation, and test splits
         dataset = train_valid_split['train']
@@ -190,7 +183,6 @@ def load_model_dataset(model_name, model_dir, device_t, bnb_config, training_dat
 
     training_preprocessed_dataset = preprocess_dataset(tokenizer, max_length, seed, dataset,"Training")
     validation_preprocessed_dataset = preprocess_dataset(tokenizer, max_length, seed, validation_dataset,"Validation")
-    # print(training_preprocessed_dataset,validation_preprocessed_dataset)
 
     return model, tokenizer, training_preprocessed_dataset, validation_preprocessed_dataset, max_length
 
@@ -466,6 +458,8 @@ def accuracy(testing_data, out_model_dir, instruction, model_name):
             #print(f'***The generated output***\n{out}')
             try:
                 #print(dataset)
+                # Define the part of the output to be compared with the expected output
+                ## USER-DEFINED
                 if dataset == 'gesture':
                     print("****************")
                     print(out)
@@ -482,7 +476,6 @@ def accuracy(testing_data, out_model_dir, instruction, model_name):
                     print(out)
                     print("------")
                     '''
-                    #out = out[0].split('\n')[2].split('(')[0]
             except:
                 print("Couldn't split the output")
            # print(f'***The generated output***\n{out}')
@@ -506,9 +499,7 @@ def accuracy(testing_data, out_model_dir, instruction, model_name):
             '''
             generated_output.append(out)
 
-            #if out == df.output[i] or str(df.output[i]) in out:
-            #print(out.count(str(df.output[i])))
-            #if str(df.output[i]) in out:
+            # MODIFY IF NEEDED
             if str(df.output[i]) in out and out.count(str(df.output[i])) == 1:
                 accuracy += 1
             else:
