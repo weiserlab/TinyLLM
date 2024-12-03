@@ -80,9 +80,9 @@ if instruction == "": ## Online - make it extendable
     testing_dataset_name =  ""
 
 else:
-    training_dataset_name = home + "datasets/"+ dataset_type + "/train.csv" 
-    validation_dataset_name = home + "datasets/" + dataset_type + "/validation.csv"
-    testing_dataset_name = home + "datasets/" + dataset_type + "/test.csv" 
+    training_dataset_name = home + "/../Datasets/"+ dataset_type + "/data/train.csv" 
+    validation_dataset_name = home + "/../Datasets/" + dataset_type + "/data/validation.csv"
+    testing_dataset_name = home + "/../Datasets/" + dataset_type + "/data/test.csv" 
 
 # gesture
 # LoRA parameters

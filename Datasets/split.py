@@ -14,8 +14,8 @@ parser.add_argument("-o", "--output_dir", type=str, default="pretraining_data", 
 args = parser.parse_args()
 
 # Configuration
-dataset1_path = os.path.join(os.path.dirname(__file__), "SHL")
-dataset2_path = os.path.join(os.path.dirname(__file__), "Fineweb")
+dataset1_path = os.path.join(os.path.dirname(__file__), "encoded", "SHL")
+dataset2_path = os.path.join(os.path.dirname(__file__), "encoded", "Fineweb")
 TOTAL_TOKENS = 9_000_000_000  # 9 billion tokens
 TRAIN_RATIO = 0.98  # 98% for training
 VALIDATION_RATIO = 1 - TRAIN_RATIO  # 2% for validation
@@ -106,12 +106,10 @@ def merge_and_save_tokens_lazy(dataset1_path, dataset2_path, ratio1, ratio2, out
             print(f"Saved shard {shard_index} with {SHARD_SIZE} tokens.")
 
     # Save any remaining tokens
-    '''
     if current_shard_token_count != 0:
         filename = os.path.join(output_dir, f"{shard_prefix}_shard_{shard_index:06d}.bin")
         write_datafile(filename, all_tokens_np[:current_shard_token_count].tolist(), "gpt-2")
         print(f"Saved final shard {shard_index} with {current_shard_token_count} tokens.")
-        '''
 
 def main():
     global TOTAL_TOKENS 

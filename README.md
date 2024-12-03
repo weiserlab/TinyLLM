@@ -39,8 +39,9 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
 
 2. Tokenize datasets using `encode.py`:  
    - Supports user's private custom data (in CSV format) or datasets hosted on HuggingFace.  
-   - By default, the script processes Fineweb (10 Billion tokens variant, auto-downloaded) and SHL (IoT sensor dataset, download instructions [here](https://github.com/weiserlab/TinyLLM/tree/main/Datasets/SHL)).
-   - Change the `datasets_to_tokenize` parameter in `encode.py` appropriately to tokenise custom datasets to include them later in the pre-training process.  
+   - By default, the script processes Fineweb (10 Billion tokens variant, auto-downloaded) and SHL (IoT sensor dataset).
+   - Download SHL dataset following the instructions [here](https://github.com/weiserlab/TinyLLM/tree/main/Datasets/SHL).
+   - Change the `datasets_to_tokenize` parameter in `encode.py` appropriately to tokenise custom datasets (if any) to include them later in the pre-training process.  
    ```bash
    python encode.py
    ```
@@ -54,7 +55,8 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
    ```
    - Current defaults produce a dataset with 9 Billion tokens, with Training:Validation split in a 98:2 ratio with 100MB shards.
    - Adjust parameters if needed. Change the `dataset1_path` and `dataset1_path` to include other datasets. More than 2 datasets can be used too by simple modifications to the script.  
-   - If necessary, reduce shard size from 100MB to 75MB or smaller.  
+   - Note that the minimum number of tokens in training/ validation datasets would be in multiples of number of tokens present in a 100MB shard (~52M tokens). This means that the actual split ratio may vary slightly from the input ratio if the `TOTAL_TOKENS` is less i.e. ~5B range. The `CHUNK_SIZE` in `encode.py` can be reduced in such cases to get a more accurate split ratio.
+   - If faced with memory constraints, reduce shard size from 100MB to 75MB or smaller.  
 </details>
 
 ---
@@ -89,17 +91,16 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
        -h 1
    ```
 
-3. Parameters:  
+3. Flags::  
    - `-e`: Model depth (e.g., `d6`, `d8`, `d10`, `d12`). [Add parameter details here].  
    - `-o`: Output directory for the trained model.
    - use `-y 1` to resume from a last checkpoint (in the same input directory).
-   - For a full list of parameters and descriptions, refer [here](https://github.com/karpathy/llm.c/blob/master/train_gpt2.cu#L1369) and [here](https://github.com/karpathy/llm.c/discussions/481).  
+   - By default, the training happens for 1 epoch. To train for more epochs, use the `-x` flag.
+   - For a full list of flags and descriptions, refer [here](https://github.com/karpathy/llm.c/blob/master/train_gpt2.cu#L1369) and [here](https://github.com/karpathy/llm.c/discussions/481).  
 
-4. Resuming training: [Add steps here]  
-
-5. Optional: Export the model in HuggingFace-compatible format:  
+4. Export the model in HuggingFace-compatible format:  
    ```bash
-   lf=$(ls custom_model/model_000*.bin | sort -V | tail -n 1) # Select the latest model
+   lf=$(ls custom_model/model_0*.bin | sort -V | tail -n 1) # Select the latest model
    python dev/eval/export_hf.py -i "$lf" -o "custom_model_hf"
    ```
 </details>
@@ -111,6 +112,29 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
 <details>
 <summary>Click to expand</summary>
 
+1. Navigate to the `Fine-tune` folder:  
+   ```bash
+   cd ../Fine-tune/
+   ```
+2. Set the required parameters for fine-tuning in the corresponding model's parameter file (`p-{model}.txt`). Currently 3 models are supported: GPT-2 (custom), Llama-3 and Phi-3.
+
+3. Run the fine-tuning script:  
+   ```bash
+    python master.py -d breathe \
+    -m "../llm.c/custom_model_hf" \
+    -n "gpt2" \
+    -rn 23 \
+    -p "p-gpt.txt"
+   ```
+   - `-d`: Dataset name (e.g., `breathe`, `shl`, `fineweb`).
+   - `-m`: Path to the pre-trained model.
+   - `-n`: Model name (e.g., `gpt2`, `llama`, `phi`).
+   - `-rn`: Run number (for logging purposes).
+   - `-p`: Parameter file for the model. (Check and chage this)
+
+(check for dataset names in the dataset section later)
+(change default parameters in the parameter file if needed)
+
 - Copy the original tokenizer files into the fine-tuning directory.  
 - [Add detailed fine-tuning steps here].  
 
@@ -118,7 +142,7 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
 
 ---
 
-### 4. Deploying the Model  
+### 4. Deploying and Inferencing the Model  
 
 <details>
 <summary>Click to expand</summary>
