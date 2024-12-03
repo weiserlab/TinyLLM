@@ -123,17 +123,22 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
     python master.py -d breathe \
     -m "../llm.c/custom_model_hf" \
     -n "gpt2" \
-    -rn 23 \
-    -p "p-gpt.txt"
+    -p "p-gpt.txt" | tee ft_output.log
    ```
    - `-d`: Dataset name (e.g., `breathe`, `shl`, `fineweb`).
    - `-m`: Path to the pre-trained model.
    - `-n`: Model name (e.g., `gpt2`, `llama`, `phi`).
-   - `-rn`: Run number (for logging purposes).
    - `-p`: Parameter file for the model. (Check and chage this)
 
+- View the loss plot directly in the terminal or in the `results/{model}/{dataset}/` directory. To view in the terminal,
+```bash
+cat results/{model}/{dataset}/loss.txt
+```
+
+- Note that the checkpoints can be removed later to save space.
 (check for dataset names in the dataset section later)
 (change default parameters in the parameter file if needed)
+(add __pycache__ to gitignore)
 
 - Copy the original tokenizer files into the fine-tuning directory.  
 - [Add detailed fine-tuning steps here].  

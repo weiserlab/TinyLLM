@@ -12,13 +12,11 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-d", "--dataset_type", help="Type of dataset: breathe, local, gesture, swim", required=True)
 parser.add_argument("-m", "--model_dir", help="Path to the model", required=True)
 parser.add_argument("-n", "--model_type", help="Short name of the model: gpt2, llama3-8b, phi3", required=True)
-parser.add_argument("-rn", "--random_number", help="Plot log file number, pass job ID", required=False)
 parser.add_argument("-p", "--parameter_file", help="File containing the fine_tuning parameters", required=True)
 ## add model type
 args = parser.parse_args()
 
 dataset_type = args.dataset_type
-rn = args.random_number
 file_path = args.parameter_file
 model_type = args.model_type
 
@@ -30,20 +28,18 @@ def load_config(file_path):
 
 print(dataset_type, model_type)
 
+output_log = "ft_output.log"
 
 if model_type == "gpt2":
     model_name = "GPT 2"
     model_dir = args.model_dir
-    output_log = f'{home}/gpt2-{dataset_type}-output-{rn}.txt'
 elif model_type == "llama3-8b":
     model_name =  "Meta Llama 3 8B"# "Microsoft Phi 3"
     model_dir = args.model_dir
-    output_log = f'{home}/llama3-{dataset_type}-output-{rn}.txt'
 elif model_type == "phi3":
     model_name = "Microsoft Phi 3"
     model_dir = args.model_dir
     # model_dir = home + 'models/phi3'
-    output_log = f'{home}/phi3-{dataset_type}-output-{rn}.txt'
 # Add any other models supported by HF's transformers here
 else:
     raise ValueError("Model type not recognized")
