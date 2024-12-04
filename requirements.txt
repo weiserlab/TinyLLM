@@ -6,7 +6,6 @@ scikit-learn
 datasets
 requests
 tiktoken
-torch
 transformers
 bitsandbytes
 peft

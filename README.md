@@ -19,10 +19,11 @@ TinyLLM is a lightweight and customizable framework designed to enable efficient
    - Set up `llama.cpp`. Refer to the build guide [here](https://github.com/VIS-WA/llama.cpp/blob/master/docs/build.md).  
    
 2. **Additional Requirements**:  
-   Install necessary Python dependencies for dataset processing and fine-tuning.  
+   - Install necessary Python dependencies for dataset processing and fine-tuning.  
    ```bash
    pip install -r requirements.txt
    ```
+   - Install suitable version of [PyTorch](https://pytorch.org/get-started/locally/)
 
 ---
 
