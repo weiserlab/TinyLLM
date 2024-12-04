@@ -105,7 +105,7 @@ bnb_config = BitsAndBytesConfig(
 
 model, tokenizer, training_preprocessed_dataset, validation_preprocessed_dataset, max_length = load_model_dataset(model_name, model_dir, device_t, bnb_config, training_dataset_name, validation_dataset_name, seed, instruction)
 
-fine_tune(model,tokenizer, training_preprocessed_dataset, validation_preprocessed_dataset, lora_r, lora_alpha, lora_dropout, bias, task_type, per_device_train_batch_size, gradient_accumulation_steps, warmup_steps, max_steps, learning_rate, fp16, logging_steps, output_dir, optim, max_length, device_t, output_merged_dir,save_parameters)
+fine_tune(model_dir, model,tokenizer, training_preprocessed_dataset, validation_preprocessed_dataset, lora_r, lora_alpha, lora_dropout, bias, task_type, per_device_train_batch_size, gradient_accumulation_steps, warmup_steps, max_steps, learning_rate, fp16, logging_steps, output_dir, optim, max_length, device_t, output_merged_dir,save_parameters)
 
 try:
     loss_plot(output_log, output_merged_dir)

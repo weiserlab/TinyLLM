@@ -220,7 +220,8 @@ def print_trainable_parameters(model, use_4bit = False):
         f"All Parameters: {all_param:,d} || Trainable Parameters: {trainable_params:,d} || Trainable Parameters %: {100 * trainable_params / all_param}"
     )
 
-def fine_tune(model,
+def fine_tune(model_dir,
+          model,
           tokenizer,
           dataset,
           validation_dataset,
@@ -393,6 +394,14 @@ def fine_tune(model,
     print("***Clearing Memory***")
     del model, tokenizer
     torch.cuda.empty_cache()
+
+    # copy the original model files except *.safetensors to the merged directory
+    # replace if the file already exists
+
+    for file in os.listdir(model_dir):
+        if not file.endswith(".safetensors"):
+            os.system(f'cp -f {model_dir}/{file} "{output_merged_dir}"{file}')
+
  
 def loss_plot(path,out_dir):
     print("***Plotting the loss***")
