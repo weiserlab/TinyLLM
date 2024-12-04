@@ -176,7 +176,7 @@ TinyLLM demonstrates adaptability across various datasets, particularly in embed
 
 
 ### Notes
-Currently, 3 in-house processed datasets (gesture detection, localisation, and breathing detection) are provided for fine-tuning, apart from `swim`, which has to be processed (find more about using the dataset [here](https://github.com/weiserlab/TinyLLM/blob/main/Datasets/swim/process.ipynb)). More information about the in-house datasets will be updated soon [here](www. huggingface.co/tiny).
+- Currently, 3 in-house processed datasets (gesture detection, localisation, and breathing detection) are provided for fine-tuning, apart from `swim`, which has to be processed (find more about using the dataset [here](https://github.com/weiserlab/TinyLLM/blob/main/Datasets/swim/process.ipynb)). More information about the in-house datasets will be updated soon [here](www.huggingface.co/tinyllm).
 - The checkpoints created during the fine-tuning process can be removed later to save space.
 
 ## Contributing  
