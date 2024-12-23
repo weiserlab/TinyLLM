@@ -2,7 +2,7 @@
 *A Framework for Training, Fine-Tuning, and Deploying Smaller LLMs on Custom Datasets*
 
 - **Website**: [TinyLLM.org](https://tinyllm.org/)  
-- **ArXiv**: Coming soon  
+- **ArXiv**: [ArXiv/2412.15304](https://arxiv.org/abs/2412.15304)
 
 
 
